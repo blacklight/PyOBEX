@@ -21,7 +21,7 @@ if __name__ == "__main__":
         sys.stderr.write("Failed to connect.\n")
         sys.exit(1)
     
-    c.put(file_name, open(file_name).read())
+    c.put(file_name, open(file_name, "rb").read())
     c.disconnect()
 
     sys.exit()
