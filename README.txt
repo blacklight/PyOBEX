@@ -36,7 +36,10 @@ This package provides a simple Python_ implementation of aspects of the OBEX
 protocol based on the information available in freely available
 `Bluetooth specifications`_ and other openly accessible online resources.
 It is not intended to be a complete, accurate, or fully functioning
-implementation of the protocol.
+implementation of the protocol. Developers may wish to build upon this
+package to implement support for more of the protocol, or to create
+user-friendly tools. See the Projects section below for links to projects
+that use PyOBEX.
 
 This package depends on Bluetooth support in the standard Python ``socket``
 module. Users of Linux and Windows XP systems may also find the PyBluez_
@@ -131,6 +134,15 @@ set the current directory and delete files. Use the interactive help facilities
 to find out more or read the docstrings in the source code.
 
 
+Projects
+--------
+
+Projects that use or extend PyOBEX are described in their own words in this
+section.
+
+`SyncBlue`_: "SyncBlue is an open-source project with the aim of developing a utility for keeping files and folders synchronized across devices of various platforms without relying on the cloud."
+
+
 Resources
 ---------
 
@@ -183,3 +195,4 @@ The contents of this package are licensed under the GNU General Public License
 .. _`PyBluez`:                  http://code.google.com/p/pybluez/
 .. _Python:                     http://www.python.org/
 .. _`David Boddie`:             mailto:david@boddie.org.uk
+.. _SyncBlue:                   http://www.syncblue.eu/

@@ -29,13 +29,14 @@ document in other formats.</em></p>
 <div id="contents">
 <p>Contents</p>
 <ul>
-<li><a href="#introduction" id="id1">Introduction</a></li>
-<li><a href="#installation" id="id2">Installation</a></li>
-<li><a href="#locating-the-bluetooth-device" id="id3">Locating the Bluetooth device</a></li>
-<li><a href="#using-the-pyobex-package" id="id4">Using the PyOBEX package</a></li>
-<li><a href="#resources" id="id5">Resources</a></li>
-<li><a href="#notes-on-the-sony-ericsson-k750i" id="id6">Notes on the Sony Ericsson K750i</a></li>
-<li><a href="#license" id="id7">License</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#locating-the-bluetooth-device">Locating the Bluetooth device</a></li>
+<li><a href="#using-the-pyobex-package">Using the PyOBEX package</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#resources">Resources</a></li>
+<li><a href="#notes-on-the-sony-ericsson-k750i">Notes on the Sony Ericsson K750i</a></li>
+<li><a href="#license">License</a></li>
 </ul>
 </div>
 <div id="introduction">
@@ -56,7 +57,10 @@ using the OBEX protocol.</p>
 protocol based on the information available in freely available
 <a href="http://bluetooth.com/Bluetooth/Technology/Building/Specifications/Default.htm">Bluetooth specifications</a> and other openly accessible online resources.
 It is not intended to be a complete, accurate, or fully functioning
-implementation of the protocol.</p>
+implementation of the protocol. Developers may wish to build upon this
+package to implement support for more of the protocol, or to create
+user-friendly tools. See the Projects section below for links to projects
+that use PyOBEX.</p>
 <p>This package depends on Bluetooth support in the standard Python <tt>socket</tt>
 module. Users of Linux and Windows XP systems may also find the <a href="http://code.google.com/p/pybluez/">PyBluez</a>
 package useful; this provides the <tt>bluetooth</tt> module described below.</p>
@@ -139,6 +143,12 @@ client.disconnect()
 <p>Other methods of the <tt>BrowserClient</tt> object can be used to get and put files,
 set the current directory and delete files. Use the interactive help facilities
 to find out more or read the docstrings in the source code.</p>
+</div>
+<div id="projects">
+<h1>Projects</h1>
+<p>Projects that use or extend PyOBEX are described in their own words in this
+section.</p>
+<p><a href="http://www.syncblue.eu/">SyncBlue</a>: &quot;SyncBlue is an open-source project with the aim of developing a utility for keeping files and folders synchronized across devices of various platforms without relying on the cloud.&quot;</p>
 </div>
 <div id="resources">
 <h1>Resources</h1>
