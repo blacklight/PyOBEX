@@ -1,16 +1,13 @@
 PyOBEX Python 3 Package
 =======================
 
-:Author: `David Boddie`_
-:Date: 2015-01-22
-:Version: 0.26
+Author: `David Boddie`_
+Date: 2015-01-22
+Version: 0.26
 
-*Note: This text is marked up using reStructuredText formatting. It should be
-readable in a text editor but can be processed to produce versions of this
-document in other formats.*
-
-
-.. contents::
+Python 3 porting: `Fabio Manganiello`_
+Date: 2019-12-11
+Version: 0.28
 
 
 Introduction
@@ -53,7 +50,9 @@ installation, unpack the contents of the archive. At the command line, enter
 the directory containing the ``setup.py`` script and install it by typing the
 following::
 
-  python setup.py install
+```
+ python setup.py install
+```
 
 You may need to become the root user or administrator to do this.
 
@@ -68,30 +67,40 @@ connect to.
 
 Discover the devices available by calling::
 
-  devices = bluetooth.discover_devices()
+```
+devices = bluetooth.discover_devices()
+```
 
 Look up names by calling::
 
-  bluetooth.lookup_name(device_address)
+```
+bluetooth.lookup_name(device_address)
+```
 
 on each device in the devices list.
 
 Find out about the services provided by a device by calling::
 
-  bluetooth.find_service(address=device_address)
+```
+bluetooth.find_service(address=device_address)
+```
 
 On my phone, the file transfer service has the service ID, "E006", so we can
 find out the port on the device that we need to connect to when using the
 BrowserClient from the PyOBEX.client module::
 
-  services = bluetooth.find_service(uuid="E006", address=device_address)
+```
+services = bluetooth.find_service(uuid="E006", address=device_address)
+```
 
 The list returned contains dictionaries corresponding to each service. The port
 used by a service can be obtained from the "port" dictionary entry. Assuming
 that the previous line of code returned a list containing a single item, we can
 obtain the port using the following code::
 
-  port = services[0]["port"]
+```
+port = services[0]["port"]
+```
 
 This integer value will be required when connecting to the service.
 
@@ -101,17 +110,17 @@ Using the PyOBEX package
 
 The PyOBEX package contains the following modules:
 
-``__init__.py``
+- ``__init__.py``
             Package file for the PyOBEX Python package.
-``common.py``
+- ``common.py``
             Classes providing common facilities for other modules.
-``client.py``
+- ``client.py``
             Client classes for sending OBEX requests and handling responses.
-``headers.py``
+- ``headers.py``
             Classes encapsulating OBEX headers.
-``requests.py``
+- ``requests.py``
             Classes encapsulating OBEX requests.
-``responses.py``
+- ``responses.py``
             Classes encapsulating OBEX responses.
 
 For most people, the client module is the most useful module because it
@@ -122,11 +131,13 @@ Using appropriate values for ``device_address`` and ``port`` obtained using the
 ``bluetooth`` module, or alternative tools on your system, the following code
 can be used to list the files in the root directory on a device::
 
-  from PyOBEX.client import BrowserClient
-  client = BrowserClient(device_address, port)
-  client.connect()
-  client.listdir()
-  client.disconnect()
+```python
+from PyOBEX.client import BrowserClient
+client = BrowserClient(device_address, port)
+client.connect()
+client.listdir()
+client.disconnect()
+```
 
 Other methods of the ``BrowserClient`` object can be used to get and put files,
 set the current directory and delete files. Use the interactive help facilities
@@ -188,10 +199,17 @@ The contents of this package are licensed under the GNU General Public License
 
 
 .. _`IrDA`:                     http://www.irda.org/
+
 .. _`OBEX`:                     http://bluetooth.com/Bluetooth/Technology/Works/OBEX.htm
+
 .. _`Bluetooth specifications`: http://bluetooth.com/Bluetooth/Technology/Building/Specifications/Default.htm
+
 .. _`OpenOBEX`:                 http://dev.zuckschwerdt.org/openobex/
+
 .. _`PyBluez`:                  http://code.google.com/p/pybluez/
+
 .. _Python:                     http://www.python.org/
+
 .. _`David Boddie`:             mailto:david@boddie.org.uk
+
 .. _SyncBlue:                   http://www.syncblue.eu/
