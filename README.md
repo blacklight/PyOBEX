@@ -1,6 +1,5 @@
-=====================
-PyOBEX Python Package
-=====================
+PyOBEX Python 3 Package
+=======================
 
 :Author: `David Boddie`_
 :Date: 2015-01-22
