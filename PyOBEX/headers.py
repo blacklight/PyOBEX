@@ -4,6 +4,7 @@
 headers.py - Classes encapsulating OBEX headers.
 
 Copyright (C) 2007 David Boddie <david@boddie.org.uk>
+Copyright (C) 2023 Fabio Manganiello <fabio@manganiello.tech>
 
 This file is part of the PyOBEX Python package.
 
@@ -25,9 +26,7 @@ import struct
 
 
 class Header:
-
     def __init__(self, data, encoded=False):
-
         if encoded:
             self.data = data
         else:
@@ -40,26 +39,24 @@ class Header:
 
 
 class UnicodeHeader(Header):
-
     def decode(self):
-        return self.data.decode('utf-16-be')
+        return str(self.data, encoding="utf_16_be")
 
     def encode(self, data):
-        binary_data = data.encode("utf-16-be") + b"\x00\x00"
+        binary_data = data.encode("utf_16_be") + b"\x00\x00"
         return struct.pack(">BH", self.code, len(binary_data) + 3) + binary_data
 
 
 class DataHeader(Header):
-
     def decode(self):
         return self.data
 
     def encode(self, data):
-        return struct.pack(">BH", self.code, len(data) + 3) + data.encode()
+        data = data.encode() if isinstance(data, str) else data
+        return struct.pack(">BH", self.code, len(data) + 3) + data
 
 
 class ByteHeader(Header):
-
     def decode(self):
         return struct.unpack(">B", self.data)[0]
 
@@ -68,7 +65,6 @@ class ByteHeader(Header):
 
 
 class FourByteHeader(Header):
-
     def decode(self):
         return struct.unpack(">I", self.data)[0]
 
@@ -161,7 +157,7 @@ header_dict = {
     0x4C: App_Parameters,
     0x4D: Auth_Challenge,
     0x4E: Auth_Response,
-    0x51: Object_Class
+    0x51: Object_Class,
 }
 
 
