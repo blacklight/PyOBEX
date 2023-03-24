@@ -22,10 +22,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from bluetooth import BluetoothSocket, RFCOMM, OBEX_FILETRANS_CLASS, \
-    OBEX_FILETRANS_PROFILE, OBEX_OBJPUSH_CLASS, OBEX_OBJPUSH_PROFILE, \
-    OBEX_UUID, PUBLIC_BROWSE_GROUP, RFCOMM_UUID, advertise_service, \
-    stop_advertising
+from bluetooth import (
+    BluetoothSocket,
+    RFCOMM,
+    OBEX_FILETRANS_CLASS,
+    OBEX_FILETRANS_PROFILE,
+    OBEX_OBJPUSH_CLASS,
+    OBEX_OBJPUSH_PROFILE,
+    OBEX_UUID,
+    PUBLIC_BROWSE_GROUP,
+    RFCOMM_UUID,
+    advertise_service,
+    stop_advertising,
+)
 
 from PyOBEX.common import OBEX_Version
 from PyOBEX import requests
@@ -35,22 +44,36 @@ from PyOBEX import responses
 class Server:
     def __init__(self, address=""):
         self.address = address
-        self.max_packet_length = 0xffff
+        self.max_packet_length = 0xFFFF
         self.obex_version = OBEX_Version()
         self.request_handler = requests.RequestHandler()
         self.connected = False
         self.remote_info = None
 
-    def start_service(self, port, name, uuid, service_classes, service_profiles,
-                      provider, description, protocols):
-
+    def start_service(
+        self,
+        port,
+        name,
+        uuid,
+        service_classes,
+        service_profiles,
+        provider,
+        description,
+        protocols,
+    ):
         socket = BluetoothSocket(RFCOMM)
         socket.bind((self.address, port))
         socket.listen(1)
 
         advertise_service(
-            socket, name, uuid, service_classes, service_profiles,
-            provider, description, protocols
+            socket,
+            name,
+            uuid,
+            service_classes,
+            service_profiles,
+            provider,
+            description,
+            protocols,
         )
 
         print("Starting server for %s on port %i" % socket.getsockname())
@@ -100,13 +123,10 @@ class Server:
     def _reject(self, socket):
         self.send_response(socket, responses.Forbidden())
 
-    # noinspection PyUnusedLocal
-    @staticmethod
-    def accept_connection(address, port):
+    def accept_connection(self, address, port):
         return True
 
     def process_request(self, connection, request, *address):
-
         """Processes the request from the connection.
 
         This method should be reimplemented in subclasses to add support for
@@ -148,9 +168,17 @@ class Server:
 
 
 class BrowserServer(Server):
-    def start_service(self, port, name="OBEX File Transfer", uuid="F9EC7BC4-953C-11d2-984E-525400DC9E09",
-                      service_classes=None, service_profiles=None, provider="", description="File transfer",
-                      protocols=None):
+    def start_service(
+        self,
+        port,
+        name="OBEX File Transfer",
+        uuid="F9EC7BC4-953C-11d2-984E-525400DC9E09",
+        service_classes=None,
+        service_profiles=None,
+        provider="",
+        description="File transfer",
+        protocols=None,
+    ):
         # "E006" also appears to work if used as a service ID. However, 1106
         # is the official profile number:
         # (https://www.bluetooth.org/en-us/specification/assigned-numbers/service-discovery)
@@ -159,19 +187,42 @@ class BrowserServer(Server):
         protocols = [OBEX_UUID]
 
         return Server.start_service(
-            self, port, name, uuid, service_classes, service_profiles,
-            provider, description, protocols
+            self,
+            port,
+            name,
+            uuid,
+            service_classes,
+            service_profiles,
+            provider,
+            description,
+            protocols,
         )
 
 
 class PushServer(Server):
-    def start_service(self, port, name="OBEX Object Push", uuid=PUBLIC_BROWSE_GROUP, service_classes=None,
-                      service_profiles=None, provider="", description="File transfer", protocols=None):
+    def start_service(
+        self,
+        port,
+        name="OBEX Object Push",
+        uuid=PUBLIC_BROWSE_GROUP,
+        service_classes=None,
+        service_profiles=None,
+        provider="",
+        description="File transfer",
+        protocols=None,
+    ):
         service_classes = [OBEX_OBJPUSH_CLASS]
         service_profiles = [OBEX_OBJPUSH_PROFILE]
         protocols = [RFCOMM_UUID, OBEX_UUID]
 
         return Server.start_service(
-            self, port, name, uuid, service_classes, service_profiles,
-            provider, description, protocols
+            self,
+            port,
+            name,
+            uuid,
+            service_classes,
+            service_profiles,
+            provider,
+            description,
+            protocols,
         )
