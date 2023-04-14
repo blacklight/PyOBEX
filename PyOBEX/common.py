@@ -155,7 +155,7 @@ class MessageHandler:
 
         def _read_packet(self, socket_):
 
-            data = ""
+            data = b""
             while len(data) < 3:
                 data += socket_.recv(3 - len(data))
             type, length = struct.unpack(self.format, data)
